@@ -16,7 +16,7 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include <stdio.h>
-void to_hexadecimal_fd ( unsigned long nb , int fd , int *som);
+void to_hexadecimal_fd ( unsigned long long nb , int fd , int *som);
 int ft_printf(const char *str, ...);
 int	ft_putchar_fd(char c, int fd);
 void	ft_putnbr_fd(int n, int fd , int *som);

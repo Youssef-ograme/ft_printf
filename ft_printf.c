@@ -39,16 +39,18 @@ int check_is (char c , va_list args)
     else if (c == 's')
         ft_putstr_fd(va_arg(args , char *) , 1 , &total_bit);
     else if (c == 'p')
-        to_hexadecimal_fd((unsigned long )va_arg(args , void *) , 1 , &total_bit);
+        to_hexadecimal_fd((unsigned long long )va_arg(args , void *) , 1 , &total_bit);
     else if (c == 'u')
         unsigned_putnbr(va_arg(args , unsigned int) , &total_bit);
     else if (c == 'x' || c == 'X')
     {
         if (c == 'x')
-            print_hex(va_arg(args , unsigned long ) , 1 , &total_bit);
+            print_hex(va_arg(args , unsigned int ) , 1 , &total_bit);
         else
-            print_hex(va_arg(args , unsigned long ) , 2, &total_bit);
+            print_hex(va_arg(args , unsigned int ) , 2, &total_bit);
     }
+    if (total_bit == -1)
+        return -1;
     return total_bit;
 }
 
@@ -75,14 +77,13 @@ int ft_printf(const char *str, ...)
         }
         else
             som += ft_putchar_fd(str[i],1);
+        if (som == -1)
+        {
+            va_end(args);
+            return -1;
+        }
         i++;
     }
     va_end(args);
     return som;
 }
-
-// int main ()
-// {
-//     // unsigned int a = 0;
-//     ft_printf("%x",4294967295);
-// }

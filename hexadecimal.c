@@ -12,15 +12,17 @@
 
 #include "ft_printf.h"
 
-void recrsive_hex (unsigned long nb , int fd , int *som)
+void recrsive_hex (unsigned long long nb , int fd , int *som)
 {
-    char str[16] = "0123456789abcdef";
+    char *str;
+    
+    str = "0123456789abcdef";
       if (nb >= 16)
         recrsive_hex(nb / 16 , fd ,som);
     *som += ft_putchar_fd(str[nb % 16],fd);
 }
 
-void to_hexadecimal_fd ( unsigned long nb , int fd , int *som)
+void to_hexadecimal_fd ( unsigned long long nb , int fd , int *som)
 {
     if (!nb)
     {

@@ -9,8 +9,8 @@ SRCES = ft_printf.c \
 		ft_putstr_fd.c\
 		ft_putchar_fd.c\
 		unsigned_putnbr.c\
-		print_hex.c\
-		main.c
+		print_hex.c
+		
 OBECTS = $(SRCES:.c=.o)
 
 all: $(NAME)
