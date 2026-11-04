@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void print_hex (int nb , int is , int *som)
+void print_hex (unsigned int nb , int is , int *som)
 {    
     char *str_x;
     char *str_X;
@@ -21,13 +21,13 @@ void print_hex (int nb , int is , int *som)
     str_X = "0123456789ABCDEF";
     if (is == 1)
     {
-        if (nb > 9)
+        if (nb >= 16)
             print_hex(nb / 16 , is , som);
         *som += ft_putchar_fd(str_x[nb % 16] ,1);
     }
     else if (is == 2)
     {
-        if (nb > 9)
+        if (nb >= 16)
             print_hex(nb / 16 , is , som);
         *som += ft_putchar_fd(str_X[nb % 16] , 1);
     }

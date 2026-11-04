@@ -17,7 +17,7 @@ int is_valid(char c)
 {
     char *str;
 
-    str = "cspxXid";
+    str = "cspxXidu";
     while(*str)
     {
         if(*str == c)
@@ -29,27 +29,25 @@ int is_valid(char c)
 
 int check_is (char c , va_list args)
 {
-    int total_bit ;
+    int total_bit;
+    
     total_bit = 0;
     if (c == 'd' || c == 'i')
         ft_putnbr_fd(va_arg(args , int), 1 , &total_bit);
     else if (c == 'c')
-        return ft_putchar_fd(va_arg(args , int) , 1);
+        total_bit += ft_putchar_fd(va_arg(args , int) , 1);
     else if (c == 's')
         ft_putstr_fd(va_arg(args , char *) , 1 , &total_bit);
     else if (c == 'p')
-    {
-        ft_putstr_fd("0x",1 , &total_bit);
         to_hexadecimal_fd((unsigned long )va_arg(args , void *) , 1 , &total_bit);
-    }
     else if (c == 'u')
-        unsigned_putnbr(va_arg(args , int) , &total_bit);
+        unsigned_putnbr(va_arg(args , unsigned int) , &total_bit);
     else if (c == 'x' || c == 'X')
     {
         if (c == 'x')
-            print_hex(va_arg(args , int) , 1 , &total_bit);
+            print_hex(va_arg(args , unsigned long ) , 1 , &total_bit);
         else
-            print_hex(va_arg(args , int) , 2, &total_bit);
+            print_hex(va_arg(args , unsigned long ) , 2, &total_bit);
     }
     return total_bit;
 }
@@ -57,18 +55,18 @@ int check_is (char c , va_list args)
 int ft_printf(const char *str, ...)
 {
     va_list args;
-    va_start(args , str);
     int i;
     int som;
     
     som = 0;
     i = 0;
+    va_start(args , str);
     while (str[i])
     {
         if (str[i] == '%' && str[i + 1] && is_valid(str[i + 1]))
         {
             i++;
-            som += check_is (str[i], args );
+            som += check_is (str[i], args);
         }
         else if(str[i] == '%' && str[i + 1] && str[i + 1] == '%')
         {
@@ -79,17 +77,12 @@ int ft_printf(const char *str, ...)
             som += ft_putchar_fd(str[i],1);
         i++;
     }
+    va_end(args);
     return som;
 }
 
 // int main ()
 // {
-    
-//     int res = ft_printf("->%s<-\n", (char *)NULL);
-//     int res2 = printf("->%s<-\n", (char *)NULL);
-    
-    
-//     printf ("bits:ft_ [%d] \n", res);
-//     printf ("bits:st_ [%d] \n", res2);
+//     // unsigned int a = 0;
+//     ft_printf("%x",4294967295);
 // }
-

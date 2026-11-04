@@ -12,13 +12,10 @@
 
 #include "ft_printf.h"
 
-void unsigned_putnbr (int n , int *som)
+void unsigned_putnbr(unsigned long nb, int *som)
 {
-    long nb;
-    nb = n;
-    if (nb < 0)
-        nb = (unsigned int)nb;
     if (nb > 9)
-        unsigned_putnbr(nb / 10 , som);
-    *som += ft_putchar_fd((nb % 10) + 48 ,1);
+        unsigned_putnbr(nb / 10, som);
+        
+    *som += ft_putchar_fd((nb % 10) + '0', 1);
 }

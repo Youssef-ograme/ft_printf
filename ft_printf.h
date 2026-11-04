@@ -21,6 +21,6 @@ int ft_printf(const char *str, ...);
 int	ft_putchar_fd(char c, int fd);
 void	ft_putnbr_fd(int n, int fd , int *som);
 char *ft_putstr_fd(char *s, int fd , int *som);
-void unsigned_putnbr (int n , int *som);
-void print_hex (int nb , int is , int *som);
+void unsigned_putnbr(unsigned long nb, int *som);
+void print_hex (unsigned int nb , int is , int *som);
 #endif
