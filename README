@@ -1,0 +1,47 @@
+*This project has been created as part of the 42 curriculum by yoograme.*
+
+# ft_printf
+
+## Description
+
+**ft_printf** is a recode of the libc `printf()`. The goal is to build a static library, `libftprintf.a`, that prints with `write()` and handles the conversions below. It returns the number of characters printed.
+
+```c
+int ft_printf(const char *, ...);
+```
+
+| Conversion | Description |
+|:----------:|-------------|
+| `%c` | A single character |
+| `%s` | A string (`(null)` if NULL) |
+| `%p` | A pointer in hexadecimal, prefixed with `0x` (`(nil)` if NULL) |
+| `%d` `%i` | A signed decimal number |
+| `%u` | An unsigned decimal number |
+| `%x` `%X` | Hexadecimal, lowercase / uppercase |
+| `%%` | A percent sign |
+
+## Instructions
+
+```bash
+make        # builds libftprintf.a (using ar)
+make clean  # removes object files
+make fclean # removes object files and the library
+make re     # fclean, then all
+```
+
+```bash
+cc -Wall -Wextra -Werror main.c libftprintf.a -o program
+```
+
+## Algorithm and Data Structure
+
+**Algorithm:** the format string is read once, left to right. A normal character is written directly. After a `%`, the next character selects the function to call, and each function returns the number of characters it wrote. The total is returned at the end.
+
+**Data structures:** `va_list` to read the arguments, and an `int` counter for the return value.
+
+## Resources
+
+- `man 3 printf`, `man 3 stdarg`, `man 2 write`, `man ar`
+- https://en.cppreference.com/w/c/variadic
+
+**Use of AI:** AI was used to understand `va_list` (parsing part), to generate test cases such as `INT_MIN`, `NULL` and `0` (testing part), and to proofread this README. The code was written, tested and understood by me.

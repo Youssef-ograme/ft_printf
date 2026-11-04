@@ -6,13 +6,13 @@
 /*   By: yoograme <yoograme@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/02 12:03:25 by yoograme          #+#    #+#             */
-/*   Updated: 2026/11/04 12:10:28 by yoograme         ###   ########.fr       */
+/*   Updated: 2026/11/04 15:39:22 by yoograme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	is_valid(char c)
+static int	is_valid(char c)
 {
 	char	*str;
 
@@ -26,7 +26,7 @@ int	is_valid(char c)
 	return (0);
 }
 
-int	check_is(char c, va_list args)
+static int	check_is(char c, va_list args)
 {
 	int	total_bit;
 
@@ -54,39 +54,44 @@ int	check_is(char c, va_list args)
 	return (total_bit);
 }
 
+static int	ft_handle(const char *str, int *i, va_list args)
+{
+	if (str[*i] == '%' && str[*i + 1] && is_valid(str[*i + 1]))
+	{
+		(*i)++;
+		return (check_is(str[*i], args));
+	}
+	if (str[*i] == '%' && str[*i + 1] == '%')
+	{
+		(*i)++;
+		return (ft_putchar_fd('%', 1));
+	}
+	return (ft_putchar_fd(str[*i], 1));
+}
+
 int	ft_printf(const char *str, ...)
 {
 	va_list	args;
 	int		i;
 	int		som;
+	int		ret;
 
-	if(!str || (write(1, 0, 0) < 0))
-		return -1;
+	if (!str || write(1, 0, 0) < 0)
+		return (-1);
 	som = 0;
 	i = 0;
-	
 	va_start(args, str);
 	while (str[i])
 	{
-		if (str[i] == '%' && str[i + 1] && is_valid(str[i + 1]))
-			som += check_is(str[++i], args);
-		else if (str[i] == '%' && str[i + 1] && str[i + 1] == '%')
-			som += ft_putchar_fd(str[++i], 1);
-		else
-			som += ft_putchar_fd(str[i], 1);
-		if (som == -1)
+		ret = ft_handle(str, &i, args);
+		if (ret == -1)
 		{
 			va_end(args);
 			return (-1);
 		}
+		som += ret;
 		i++;
 	}
 	va_end(args);
 	return (som);
 }
-// #include <stdio.h>
-// int main ()
-// {
-// 	int res = ft_printf(NULL, -1);
-// 	// printf (NULL, -1);
-// }
