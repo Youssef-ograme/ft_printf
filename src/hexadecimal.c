@@ -20,6 +20,8 @@ void	recrsive_hex(unsigned long long nb, int fd, int *som)
 	if (nb >= 16)
 		recrsive_hex(nb / 16, fd, som);
 	*som += ft_putchar_fd(str[nb % 16], fd);
+	if (*som == -1)
+		*som = -1;
 }
 
 void	to_hexadecimal_fd(unsigned long long nb, int fd, int *som)
