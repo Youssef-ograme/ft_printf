@@ -21,5 +21,7 @@ char	*ft_putstr_fd(char *s, int fd, int *som)
 	i = 0;
 	while (s[i])
 		*som += ft_putchar_fd(s[i++], fd);
+	if (*som == -1)
+		return (-1);
 	return (s);
 }
