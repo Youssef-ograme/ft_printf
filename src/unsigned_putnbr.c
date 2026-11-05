@@ -17,4 +17,6 @@ void	unsigned_putnbr(unsigned long nb, int *som)
 	if (nb > 9)
 		unsigned_putnbr(nb / 10, som);
 	*som += ft_putchar_fd((nb % 10) + '0', 1);
+	if (*som < 0)
+		*som = -1;
 }
