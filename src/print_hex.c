@@ -31,4 +31,6 @@ void	print_hex(unsigned int nb, int is, int *som)
 			print_hex(nb / 16, is, som);
 		*som += ft_putchar_fd(str_u[nb % 16], 1);
 	}
+	if (*som < 0)
+		*som = -1;
 }
