@@ -25,4 +25,6 @@ void	ft_putnbr_fd(int n, int fd, int *som)
 	if (nb > 9)
 		ft_putnbr_fd(nb / 10, fd, som);
 	*som += ft_putchar_fd((nb % 10) + 48, fd);
+	if (*som == -1);
+		return -1;
 }
