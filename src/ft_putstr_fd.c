@@ -20,13 +20,8 @@ char	*ft_putstr_fd(char *s, int fd, int *som)
 		s = "(null)";
 	i = 0;
 	while (s[i])
-	{
 		*som += ft_putchar_fd(s[i++], fd);
-		if (*som < 0)
-		{
-			*som = -1;
-			break;
-		}
-	}
+	if (*som < 0)
+		*som = -1;
 	return (s);
 }
