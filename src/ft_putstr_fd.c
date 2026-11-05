@@ -22,6 +22,6 @@ char	*ft_putstr_fd(char *s, int fd, int *som)
 	while (s[i])
 		*som += ft_putchar_fd(s[i++], fd);
 	if (*som == -1)
-		return (-1);
+		*som = -1;
 	return (s);
 }
